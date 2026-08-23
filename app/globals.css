@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1B5E20;
+  --color-primary-dark: #0D3B10;
+  --color-primary-light: #4C8C4A;
+  --color-gold: #FFB300;
+  --color-darkgray: #212121;
+}
+
+html,body{margin:0;padding:0;}
+body{font-family:Arial,Helvetica,sans-serif;}
+
+/* Scroll fade-in animation (mobile). Elements marked with the
+   data-scroll-fade attribute (see components/ScrollFadeIn.tsx) start
+   slightly translated + transparent and animate to their normal state
+   the first time they enter the viewport while scrolling. Kept purely
+   additive - it only affects elements that opt in, so it never changes
+   existing layout, spacing or colors. */
+@media (max-width: 767px) {
+  [data-scroll-fade] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  [data-scroll-fade].scroll-fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-scroll-fade] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

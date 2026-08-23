@@ -15,6 +15,7 @@ const emptyDraft: ParsedSchemeDraft = {
   eligibility: [],
   documents_required: [],
   how_to_apply: "",
+  official_link: "",
   state_name: "",
 };
 
@@ -36,6 +37,7 @@ export default function SchemeForm({ initialScheme }: { initialScheme?: Scheme }
           eligibility: initialScheme.eligibility || [],
           documents_required: initialScheme.documents_required || [],
           how_to_apply: initialScheme.how_to_apply || "",
+          official_link: initialScheme.official_link || "",
           state_name: initialScheme.state_name || "",
         }
       : emptyDraft
@@ -57,7 +59,7 @@ export default function SchemeForm({ initialScheme }: { initialScheme?: Scheme }
       });
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || "AI parsing failed");
-      setForm(json.draft);
+      setForm({ official_link: "", ...json.draft });
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -162,6 +164,20 @@ export default function SchemeForm({ initialScheme }: { initialScheme?: Scheme }
             />
           </Field>
         </div>
+
+        <Field label="Official Government Link">
+          <input
+            type="url"
+            value={form.official_link || ""}
+            onChange={(e) => update("official_link", e.target.value)}
+            className="input"
+            placeholder="https://pmkisan.gov.in"
+          />
+          <span className="block text-[11px] text-gray-400 mt-1">
+            The visitor's "Visit Official Portal" button on the scheme page will point here. Leave blank to hide
+            that button.
+          </span>
+        </Field>
 
         <Field label="Short Summary">
           <textarea

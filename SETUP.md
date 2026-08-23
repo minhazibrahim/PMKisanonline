@@ -1,6 +1,6 @@
 # PMkisanOnline - Setup & Admin Guide
 
-## 1. Install & configure
+## 1. Install & configure 
 
 ```bash
 npm install

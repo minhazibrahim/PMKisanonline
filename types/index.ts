@@ -49,6 +49,7 @@ export interface ParsedSchemeDraft {
   eligibility: string[];
   documents_required: string[];
   how_to_apply: string;
+  official_link?: string;
   state_name?: string;
 }
 
